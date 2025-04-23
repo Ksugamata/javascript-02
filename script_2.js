@@ -1,20 +1,23 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const button = document.getElementById("submitBtn");
-  button.addEventListener("click", validateName);
+const add = document.addEventListener.bind(document);
+const byId = (id) => document.getElementById(id);
+
+add("DOMContentLoaded", () => {
+  const btn = byId("submitBtn");
+  const nameInput = byId("nameInput");
+  const msg = byId("message");
+
+  btn.addEventListener("click", () => {
+    const name = nameInput.value.trim();
+
+    if (name.length < 3) {
+      msg.textContent = "名前は3文字以上で入力してください";
+      msg.className = "message";
+    } else if (name.length > 5) {
+      msg.textContent = "名前は5文字以下で入力してください";
+      msg.className = "message";
+    } else {
+      msg.textContent = "送信されました";
+      msg.className = "message success";
+    }
+  });
 });
-
-function validateName() {
-  const name = document.getElementById("nameInput").value.trim();
-  const message = document.getElementById("message");
-
-  if (name.length < 3) {
-    message.textContent = "名前は3文字以上で入力してください";
-    message.className = "message";
-  } else if (name.length > 5) {
-    message.textContent = "名前は5文字以下で入力してください";
-    message.className = "message";
-  } else {
-    message.textContent = "送信されました";
-    message.className = "message success";
-  }
-}
